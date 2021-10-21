@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Nuansa.co',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xff3D56B2)
+      ),
       home: LoginScreen(),
     );
   }
