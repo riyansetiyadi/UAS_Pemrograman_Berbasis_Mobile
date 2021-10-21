@@ -49,7 +49,18 @@ class LoginScreen extends StatelessWidget {
       },
       onRecoverPassword: _recoverPassword,
       messages: LoginMessages(
-        goBackButton: "Kembali"
+        passwordHint: "Kata Sandi",
+        forgotPasswordButton: "Lupa Password?",
+        goBackButton: "Kembali",
+        loginButton: "Masuk",
+        signupButton: "Daftar",
+        recoverPasswordButton: "Lanjutkan",
+        recoverPasswordIntro: "Setel ulang kata sandi anda di sini",
+        recoverPasswordDescription: "Kami akan mengirimkan kata sandi anda ke akun email ini",
+        confirmPasswordError: "Kata sandi salah",
+        recoverPasswordSuccess: "Email telah dikirim",
+        flushbarTitleError: "Kesalahan",
+        flushbarTitleSuccess: "Sukses"
       ),
     );
   }
