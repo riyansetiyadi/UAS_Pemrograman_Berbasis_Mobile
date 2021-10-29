@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'models/user_model.dart';
-import 'home.dart';
+import 'navigation.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -34,17 +34,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      // theme: LoginTheme(
-      //   bodyStyle: TextStyle(
-      //     color: Colors.white
-      //   )
-      // ),
       logo: "assets/images/nuansa.png",
       onLogin: _authUser,
       onSignup: _authUser,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
+          builder: (context) => Navigation(),
         ));
       },
       onRecoverPassword: _recoverPassword,
