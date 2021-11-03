@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuansa/profil.dart';
 import 'home.dart';
 
 
@@ -19,10 +20,7 @@ class _NavigationState extends State<Navigation> {
       'Index 1: Business',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    ProfilScreen(),
   ];
 
   void _onItemTapped(int index) {
