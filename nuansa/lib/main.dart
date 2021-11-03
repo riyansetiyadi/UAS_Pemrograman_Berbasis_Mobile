@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'home.dart';
+import 'detail_wisata.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +16,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xff3D56B2)
       ),
       home: LoginScreen(),
+      routes: {
+        '/home'   : (BuildContext ctx) => HomeScreen(),
+        '/detail' : (BuildContext ctx) => DetailWisata(),
+      },
     );
   }
 }
