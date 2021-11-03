@@ -9,7 +9,6 @@ class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
   Future<String?>? _authUser(LoginData data) {
-    print('Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) {
       if (!users.containsKey(data.name)) {
         return 'User not exists';
@@ -22,7 +21,6 @@ class LoginScreen extends StatelessWidget {
   }
 
   Future<String?>? _recoverPassword(String name) {
-    print('Name: $name');
     return Future.delayed(loginTime).then((_) {
       if (!users.containsKey(name)) {
         return 'User not exists';
@@ -34,7 +32,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      logo: "assets/images/nuansa.png",
+      title: "Nuansa.co",
       onLogin: _authUser,
       onSignup: _authUser,
       onSubmitAnimationCompleted: () {
