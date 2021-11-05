@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'models/wisata_model.dart';
@@ -10,7 +12,6 @@ class ProfilScreen extends StatelessWidget {
     return Scaffold(
     body: SingleChildScrollView(
       child: Container(
-        
         padding: EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
@@ -49,12 +50,75 @@ class ProfilScreen extends StatelessWidget {
                     
                   ],
                 ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Nama Lengkap",
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(
+                height: 10,),
+              Text(
+                "Naufal Zakly S.",
+                style: TextStyle(
+                    fontSize: 20
+                ),
+              ),
+              SizedBox(
+                height: 20,),
+              Text(
+                "Alamat",
+                  style: TextStyle(
+                    fontSize: 30
+                  ),
+                ),
+              SizedBox(
+                height: 10,),
+              Text(
+                "Jl. Kalimantan, Jember",
+                style: TextStyle(
+                  fontSize: 20
+                ),
+              ),
+              SizedBox(
+                height: 20,),
+              Text(
+                "Email",
+                  style: TextStyle(
+                    fontSize: 30
+                  ),
+                ),
+              SizedBox(
+                height: 10,),
+              Text(
+                "Iniemail@gmail.com",
+                style: TextStyle(
+                  fontSize: 20
+                ),
+              ),
+              SizedBox(height: 20,),
+              Text(
+                "Ketentuan Layanan",
+                style: TextStyle(
+                  fontSize: 20
+                ),
+              ),
+              SizedBox(height: 10,),
+              Text(
+                "Logout",
+                style: TextStyle(
+                  fontSize: 20
+                ),
               ),
             ],
           ),
         ),
-    ),
-    );
+            ]),
+    )));
   }
 }
 
