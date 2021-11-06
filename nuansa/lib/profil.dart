@@ -66,12 +66,36 @@ class ProfilScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      "Name : Naufal Zakly S."),
+                    Container(
+                      child: Row(
+                        children: [
+                          Icon(Icons.account_circle_outlined),
+                          SizedBox(height: 20,),
+                          Text(
+                            "Naufal Zakly S."),
+                          
+                        ],
+                      ),
+                    ),
                     SizedBox(height: 10,),
-                    Text("Alamat : Jl. Kalimantan, Jember"),
+                    Container(
+                      child: Row(
+                        children: [
+                          Icon(Icons.add_location_outlined),
+                          SizedBox(height: 20,),
+                          Text("Jl. Kalimantan, Jember"),
+                        ],
+                      ),
+                    ),
                     SizedBox(height: 10,),
-                    Text("Email : dribbble@gmail.com")
+                    Container(
+                      child: Row(
+                        children: [
+                          Icon(Icons.alternate_email_outlined),
+                          SizedBox(height: 10,),
+                          Text("dribbble@gmail.com")
+                        ],),
+                    )
                   ],
                 ),
 
@@ -102,12 +126,37 @@ class ProfilScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Privacy and Policy"),
+                  Container(
+                    child: Row(
+                      children: [
+                        Icon(Icons.privacy_tip_outlined),
+                        SizedBox(height: 20,),
+                        Text("Privacy and Policy"),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 10,),
-                  Text("Help"),
+                  Container(
+                    child: Row(
+                      children: [
+                        Icon(Icons.help_outline),
+                        SizedBox(height: 20,),
+                        Text("Help"),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 10,),
-                  Text("Logout")
-              ],),
+                  Container(
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout_outlined),
+                        SizedBox(height: 20,),
+                        Text("Logout")
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
