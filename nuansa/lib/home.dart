@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
 import 'models/wisata_model.dart';
+import 'db/database.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  DbHelper dbHelper = DbHelper();
+
+  var _dataWisata = [
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+  ];
+
+  void simpanWisata() {
+    for (final e in _dataWisata) {
+      dbHelper.insertWisata(e);
+    }  
+  }
+
+  @override
   Widget build(BuildContext context) {
+    simpanWisata();
+
     return SingleChildScrollView(
         child: Column(
           children: [
@@ -41,27 +71,12 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
-            _listWisataScroller(context, "Destinasi Terdekat", dataWisata),
-            _listWisataScroller(context, "Destinasi Terpopuler", dataWisata),
+            _listWisataScroller(context, "Destinasi Terdekat", _dataWisata),
+            _listWisataScroller(context, "Destinasi Terpopuler", _dataWisata),
           ],
         ),
     );
   }
-
-
-  get dataWisata => [
-    ModelWisata(id: 0, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 1, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 2, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 3, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 4, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 5, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 6, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 7, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 8, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 9, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-    ModelWisata(id: 10, foto: "assets/images/papuma.jpg", nama: "Papuma", lokasi: "Jember", deskripsi: "deskripsi"),
-  ];
 
   Widget _listWisataScroller(BuildContext context, String titlePage, List dataWisata) {
     return Container(
@@ -92,12 +107,12 @@ class HomeScreen extends StatelessWidget {
                 children: dataWisata.map((wisata) {
                   return InkWell(
                     onTap: () async {
-                                var result = await Navigator.of(context).pushNamed(
+                                await Navigator.of(context).pushNamed(
                                   '/detail',
                                   arguments: {
                                     'wisata': wisata,
-                                    },
-                                  );
+                                  },
+                                );
                               },
                     child: Container(
                       width: 200,
@@ -132,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              wisata.lokasi,
+                              wisata.kota,
                               style: TextStyle(
                                 fontSize: 25,
                                 color: Colors.white,

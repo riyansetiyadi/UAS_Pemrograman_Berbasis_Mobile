@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nuansa.co',
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xff3D56B2)
+        scaffoldBackgroundColor: Color(0xff3D56B2),
       ),
       home: LoginScreen(),
       routes: {
