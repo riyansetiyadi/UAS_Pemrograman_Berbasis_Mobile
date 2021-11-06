@@ -10,115 +10,108 @@ class ProfilScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.all(20.0),
+      body: SingleChildScrollView(
+
+        child: Container(
           child: Column(
-            children: <Widget>[
-              Text(
-                "My Profil",
+            children: [
+            SizedBox(height: 15,),
+            Text(
+              "Pengaturan",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white
+              ),
+            ),
+            SizedBox(height: 30,),
+            SizedBox(
+              height: 90,
+              width: 90,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/home_bg.jpg"),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10,),
+            
+          Container(
+            margin: EdgeInsets.only(right: 500),
+            child: Column(
+              children: [
+                Text("Account",
                 style: TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(80.0),
-                child: Image.asset(
-                  'assets/images/home_bg.jpg',
-                  width: 150.0,
-                  height: 150.0,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Container(
-                width: double.infinity,
+                  color:Colors.white,
+                  fontSize: 20 ),)
+              ],
+            ),
+          ),
+        
+            Padding(
+              padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Container(
+                width:double.infinity ,
                 margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
-                height: 500,
+                padding: EdgeInsets.all(25),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3))
-                    
+                  borderRadius:BorderRadius.circular(15),
+                  
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Name : Naufal Zakly S."),
+                    SizedBox(height: 10,),
+                    Text("Alamat : Jl. Kalimantan, Jember"),
+                    SizedBox(height: 10,),
+                    Text("Email : dribbble@gmail.com")
                   ],
                 ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Nama Lengkap",
-                style: TextStyle(
-                  fontSize: 30,
-                ),
+
               ),
-              SizedBox(
-                height: 10,),
-              Text(
-                "Naufal Zakly S.",
+            ),
+          Container(
+            margin: EdgeInsets.only(right: 500),
+            child: Column(
+              children: [
+                Text("General",
                 style: TextStyle(
-                    fontSize: 20
-                ),
-              ),
-              SizedBox(
-                height: 20,),
-              Text(
-                "Alamat",
-                  style: TextStyle(
-                    fontSize: 30
-                  ),
-                ),
-              SizedBox(
-                height: 10,),
-              Text(
-                "Jl. Kalimantan, Jember",
-                style: TextStyle(
-                  fontSize: 20
-                ),
-              ),
-              SizedBox(
-                height: 20,),
-              Text(
-                "Email",
-                  style: TextStyle(
-                    fontSize: 30
-                  ),
-                ),
-              SizedBox(
-                height: 10,),
-              Text(
-                "Iniemail@gmail.com",
-                style: TextStyle(
-                  fontSize: 20
-                ),
-              ),
-              SizedBox(height: 20,),
-              Text(
-                "Ketentuan Layanan",
-                style: TextStyle(
-                  fontSize: 20
-                ),
-              ),
-              SizedBox(height: 10,),
-              Text(
-                "Logout",
-                style: TextStyle(
-                  fontSize: 20
-                ),
-              ),
-            ],
+                  color:Colors.white,
+                  fontSize: 20 ),),
+              ],
+            
+            ),
           ),
-        ),
+          Padding(
+            padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Container(
+              width: double.infinity,
+              margin: EdgeInsets.all(10),
+              padding: EdgeInsets.all(25),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius:BorderRadius.circular(15),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Privacy and Policy"),
+                  SizedBox(height: 10,),
+                  Text("Help"),
+                  SizedBox(height: 10,),
+                  Text("Logout")
+              ],),
+            ),
+          ),
+
             ]),
     )));
   }
 }
-
