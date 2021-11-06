@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nuansa/profil.dart';
+import 'favorit.dart';
 import 'home.dart';
 
 
@@ -16,10 +17,7 @@ class _NavigationState extends State<Navigation> {
   static const List<Widget> _widgetOptions = 
   <Widget>[
     HomeScreen(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    FavoritScreen(),
     ProfilScreen(),
   ];
 
