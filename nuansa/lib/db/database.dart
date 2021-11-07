@@ -68,6 +68,7 @@ class DbHelper {
   Future<Database> get database async {
     if (_database == null) {
       _database = await initDb();
+      simpanDataWisata();
     }
     return _database!;
   }
@@ -77,6 +78,26 @@ class DbHelper {
   //   var mapList = await db.query('user', orderBy: 'name');
   //   return mapList;
   // }
+
+  void simpanDataWisata() {
+    var _dataWisata = [
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+      WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
+    ];
+
+    for (final e in _dataWisata) {
+      insertWisata(e);
+    }
+  }
 
 //create databases
   Future<int> insertUser(UserModel object) async {

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'models/wisata_model.dart';
@@ -46,7 +44,8 @@ class ProfilScreen extends StatelessWidget {
                 Text("Account",
                 style: TextStyle(
                   color:Colors.white,
-                  fontSize: 20 ),)
+                  fontSize: 20 ),
+                )
               ],
             ),
           ),

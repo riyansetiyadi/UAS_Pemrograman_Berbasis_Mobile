@@ -26,15 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
     WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
   ];
 
-  void simpanWisata() {
-    for (final e in _dataWisata) {
-      dbHelper.insertWisata(e);
-    }  
-  }
-
   @override
   Widget build(BuildContext context) {
-    simpanWisata();
 
     return SingleChildScrollView(
         child: Column(
