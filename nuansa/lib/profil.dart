@@ -40,13 +40,22 @@ class ProfilScreen extends StatelessWidget {
             SizedBox(height: 10,),
             
           Container(
-            margin: EdgeInsets.only(right: 500),
+            
             child: Column(
               children: [
-                Text("Account",
-                style: TextStyle(
-                  color:Colors.white,
-                  fontSize: 20 ),)
+                Container(
+                  child: Row(
+                    children: [
+                      Text(" "),
+                      SizedBox(width: 30,),
+                      Text("Account",
+                      style: TextStyle(
+                        color:Colors.white,
+                        fontSize: 20 ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -70,7 +79,7 @@ class ProfilScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(Icons.account_circle_outlined),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 10,width: 15,),
                           Text(
                             "Naufal Zakly S."),
                           
@@ -82,7 +91,7 @@ class ProfilScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(Icons.add_location_outlined),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 10,width: 15,),
                           Text("Jl. Kalimantan, Jember"),
                         ],
                       ),
@@ -92,7 +101,7 @@ class ProfilScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(Icons.alternate_email_outlined),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 10,width: 15,),
                           Text("dribbble@gmail.com")
                         ],),
                     )
@@ -102,15 +111,22 @@ class ProfilScreen extends StatelessWidget {
               ),
             ),
           Container(
-            margin: EdgeInsets.only(right: 500),
+            
             child: Column(
               children: [
-                Text("General",
-                style: TextStyle(
-                  color:Colors.white,
-                  fontSize: 20 ),),
+                Container(
+                  child: Row(
+                    children: [
+                      SizedBox(width:30 ,),
+                      Text("General",
+                      style: TextStyle(
+                        color:Colors.white,
+                        fontSize: 20 ),),
+                    
+                    ],
+                  ),
+                ),
               ],
-            
             ),
           ),
           Padding(
@@ -130,7 +146,7 @@ class ProfilScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.privacy_tip_outlined),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 10,width: 15,),
                         Text("Privacy and Policy"),
                       ],
                     ),
@@ -140,7 +156,7 @@ class ProfilScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.help_outline),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 10,width: 15,),
                         Text("Help"),
                       ],
                     ),
@@ -150,7 +166,7 @@ class ProfilScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.logout_outlined),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 10,width: 15,),
                         Text("Logout")
                       ],
                     ),
