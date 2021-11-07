@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nuansa/profil.dart';
 import 'favorit.dart';
 import 'home.dart';
-
+import 'db/database.dart';
+import 'models/wisata_model.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -12,14 +13,11 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
+  DbHelper dbHelper = DbHelper();
+  int count = 0;
+  List<WisataModel> listWisata = []; 
+  
   int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = 
-  <Widget>[
-    HomeScreen(),
-    FavoritScreen(),
-    ProfilScreen(),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -29,6 +27,14 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    Future<List<WisataModel>> listWisataFuture = dbHelper.getWisataList();
+    listWisataFuture.then((listWisata) {
+      this.count = listWisata.length;
+      if (this.count != 0) {
+        this.listWisata = listWisata;
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Nuansa.co"),
@@ -40,7 +46,7 @@ class _NavigationState extends State<Navigation> {
           )
         ],
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: <Widget>[HomeScreen(), FavoritScreen(listWisata: listWisata,), ProfilScreen(),].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

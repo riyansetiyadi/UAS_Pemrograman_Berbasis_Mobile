@@ -1,32 +1,23 @@
 import 'package:flutter/material.dart';
 import 'models/wisata_model.dart';
-import 'db/database.dart';
 
 class FavoritScreen extends StatefulWidget {
-  const FavoritScreen({Key? key}) : super(key: key);
+  final List<WisataModel> listWisata;
+  const FavoritScreen({Key? key, required this.listWisata}) : super(key: key);
 
   @override
   FavoritScreenState createState() => FavoritScreenState();
 }
 
 class FavoritScreenState extends State<FavoritScreen> {
-  DbHelper dbHelper = DbHelper();
-  int count = 0;
-  List<WisataModel> listWisata = []; 
 
   @override
   Widget build(BuildContext context) {
-    Future<List<WisataModel>> listWisataFuture = dbHelper.getWisataList();
-    listWisataFuture.then((listWisata) {
-      this.count = listWisata.length;
-      if (this.count != 0) {
-        this.listWisata = listWisata;
-      }
-    });
+    
 
     return SingleChildScrollView(
       child: Column(
-        children: listWisata.map((wisata) {
+        children: widget.listWisata.map((wisata) {
           return InkWell(
             onTap: () async {
                                 await Navigator.of(context).pushNamed(
