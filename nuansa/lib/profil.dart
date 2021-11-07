@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'models/wisata_model.dart';
@@ -43,6 +41,7 @@ class ProfilScreen extends StatelessWidget {
             
             child: Column(
               children: [
+<<<<<<< HEAD
                 Container(
                   child: Row(
                     children: [
@@ -55,7 +54,6 @@ class ProfilScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
               ],
             ),
           ),
