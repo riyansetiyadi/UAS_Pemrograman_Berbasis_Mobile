@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nuansa/db/database.dart';
 import 'package:nuansa/models/user_model.dart';
 import 'models/wisata_model.dart';
 
@@ -11,8 +12,9 @@ class DetailWisata extends StatefulWidget {
 }
 
 class _DetailWisataState extends State<DetailWisata> {
-  WisataModel _wisata = WisataModel("", "error.png", "error", "error", "error", "error", "error", "error");
+  WisataModel _wisata = WisataModel("", "error.png", "error", "error", "error", "error", "error", 0, "error");
   UserModel _userData = UserModel("", "error.png", "error", "error", "error", []);
+  DatabaseManager database = DatabaseManager();
 
   bool favorite = false;
 
@@ -28,6 +30,7 @@ class _DetailWisataState extends State<DetailWisata> {
     if (_userData.wisataFavorite.contains(_wisata.id)) {
       favorite = true;
     }
+    
     
     // final listDesc = <Widget>[];
     // String textDesc = "";
@@ -94,6 +97,20 @@ class _DetailWisataState extends State<DetailWisata> {
                           onPressed: () {
                             setState(() {
                               favorite = !favorite;
+                              if (favorite) {
+                                if (!_userData.wisataFavorite.contains(_wisata.id)); {
+                                  _userData.wisataFavorite.add(_wisata.id);
+                                  database.updateUser(_userData);
+                                  _wisata.jumlahFavorite += 1;
+                                  database.updateWisata(_wisata);
+                                }
+                              } else {
+                                if (_userData.wisataFavorite.remove(_wisata.id)) {
+                                  database.updateUser(_userData);
+                                  _wisata.jumlahFavorite -= 1;
+                                  database.updateWisata(_wisata);
+                                }
+                              }
                             });
                           },
                           icon: Icon(Icons.favorite),
