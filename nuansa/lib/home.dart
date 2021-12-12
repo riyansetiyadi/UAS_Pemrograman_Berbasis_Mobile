@@ -5,9 +5,8 @@ import 'models/wisata_model.dart';
 import 'db/database.dart';
 
 class HomeScreen extends StatefulWidget {
-  final Future<List> listWisata;
   final UserModel userData;
-  const HomeScreen({Key? key, required this.listWisata, required this.userData}) : super(key: key);
+  const HomeScreen({Key? key, required this.userData}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -15,8 +14,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   DatabaseManager database = DatabaseManager();
-  int count = 0;
-  List listWisata = [];
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            _listWisataScroller(context, "Destinasi Terdekat", widget.listWisata),
-            _listWisataScroller(context, "Destinasi Terpopuler", widget.listWisata),
+            _listWisataScroller(context, "Destinasi Terdekat", database.getWisataList()),
+            _listWisataScroller(context, "Destinasi Terpopuler", database.getWisataList(sortKolom: 'jumlahFavorite', descending: true)),
           ],
         ),
     );
