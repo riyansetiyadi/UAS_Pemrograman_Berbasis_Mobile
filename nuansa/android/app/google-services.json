@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "975649391967",
+    "project_id": "uas-pemro-mobile",
+    "storage_bucket": "uas-pemro-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975649391967:android:e533cd2b116c76c163a2ea",
+        "android_client_info": {
+          "package_name": "com.app.nuansa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975649391967-5c9039g412d842oqv7i8tn3lku1scus3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM7OtvEtBV76Ax-IhYd8Ct_LD-2zNrojI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975649391967-5c9039g412d842oqv7i8tn3lku1scus3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
