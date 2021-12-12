@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:nuansa/db/database.dart';
 import 'package:nuansa/models/user_model.dart';
 import 'models/wisata_model.dart';
+import 'detail_wisata.dart';
 
 class FavoritScreen extends StatefulWidget {
-  final Future<List> listWisata;
   final UserModel userData;
-  const FavoritScreen({Key? key, required this.listWisata, required this.userData}) : super(key: key);
+  const FavoritScreen({Key? key, required this.userData}) : super(key: key);
 
   @override
   FavoritScreenState createState() => FavoritScreenState();
 }
 
 class FavoritScreenState extends State<FavoritScreen> {
+  DatabaseManager database = DatabaseManager();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: widget.listWisata,
+      future: database.getUserFavorite(widget.userData.wisataFavorite),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return SingleChildScrollView(
@@ -24,13 +26,18 @@ class FavoritScreenState extends State<FavoritScreen> {
               children: [
                 for (var wisata in (snapshot.data as List)) InkWell(
                   onTap: () async {
-                    await Navigator.of(context).pushNamed(
-                      '/detail',
-                      arguments: {
-                        'wisata': wisata,
-                        'user': widget.userData,
-                      },
-                    );
+                    await Navigator.push(
+                    context,
+                       MaterialPageRoute(
+                         builder: (context) => const DetailWisata(),
+                         settings: RouteSettings(
+                           arguments: {
+                             'wisata': wisata,
+                             'user': widget.userData,
+                           },
+                         ),
+                       ),
+                     );
                   },
                   child: Container(
                     margin: EdgeInsets.all(10),
