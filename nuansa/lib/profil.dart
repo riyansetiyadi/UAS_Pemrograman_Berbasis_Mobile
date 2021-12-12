@@ -41,7 +41,6 @@ class ProfilScreen extends StatelessWidget {
             
             child: Column(
               children: [
-<<<<<<< HEAD
                 Container(
                   child: Row(
                     children: [
@@ -54,6 +53,7 @@ class ProfilScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                )
               ],
             ),
           ),
