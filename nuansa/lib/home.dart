@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:nuansa/detail_wisata.dart';
+import 'package:nuansa/models/user_model.dart';
 import 'models/wisata_model.dart';
 import 'db/database.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final Future<List> listWisata;
+  final UserModel userData;
+  const HomeScreen({Key? key, required this.listWisata, required this.userData}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DbHelper dbHelper = DbHelper();
-
-  var _dataWisata = [
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-    WisataModel(null, "assets/images/papuma.jpg", "Papuma", "Jember", "Indonesia", "deskripsi"),
-  ];
+  DatabaseManager database = DatabaseManager();
+  int count = 0;
+  List listWisata = [];
 
   @override
   Widget build(BuildContext context) {
@@ -64,99 +56,111 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            _listWisataScroller(context, "Destinasi Terdekat", _dataWisata),
-            _listWisataScroller(context, "Destinasi Terpopuler", _dataWisata),
+            _listWisataScroller(context, "Destinasi Terdekat", widget.listWisata),
+            _listWisataScroller(context, "Destinasi Terpopuler", widget.listWisata),
           ],
         ),
     );
   }
 
-  Widget _listWisataScroller(BuildContext context, String titlePage, List dataWisata) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-      child: Column(
-        children: [
-          FractionallySizedBox(
-            widthFactor: 1,
-            child: Text(
-              titlePage,
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-                height: 2,
-              ),
-            ),
-          ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: FittedBox(
-              fit: BoxFit.fill,
-              alignment: Alignment.topCenter,
-              child: Row(
-                children: dataWisata.map((wisata) {
-                  return InkWell(
-                    onTap: () async {
-                                await Navigator.of(context).pushNamed(
-                                  '/detail',
+  Widget _listWisataScroller(BuildContext context, String titlePage, Future<List> dataWisata) {
+    return FutureBuilder(
+      future: dataWisata,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Column(
+              children: [
+                FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Text(
+                    titlePage,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                      height: 2,
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  child: FittedBox(
+                    fit: BoxFit.fill,
+                    alignment: Alignment.topCenter,
+                    child: Row(
+                      children: [for (var wisata in (snapshot.data as List)) InkWell(
+                          onTap: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DetailWisata(),
+                                settings: RouteSettings(
                                   arguments: {
                                     'wisata': wisata,
+                                    'user': widget.userData,
                                   },
-                                );
-                              },
-                    child: Container(
-                      width: 200,
-                      margin: EdgeInsets.only(right: 20),
-                      height: 200,
-                      child: Stack(
-                        alignment: AlignmentDirectional.bottomStart,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: ColorFiltered(
-                              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.luminosity),
-                              child: Image.asset(
-                                wisata.foto,
-                                width: 200,
-                                height: 200,
-                                fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
+                            );
+                          },
+                          child: Container(
+                            width: 200,
+                            margin: EdgeInsets.only(right: 20),
+                            height: 200,
+                            child: Stack(
+                              alignment: AlignmentDirectional.bottomStart,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  child: ColorFiltered(
+                                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.luminosity),
+                                    child: Image.asset(
+                                      wisata.foto,
+                                      width: 200,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 40),
+                                  child: Text(
+                                    wisata.nama,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Text(
+                                    wisata.kecamatan,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            )
                           ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 40),
-                            child: Text(
-                              wisata.nama,
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              wisata.kota,
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ]
-                      )
+                        )
+                      ])
                     ),
-                  );
-                }).toList()
-              ),
+                  ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+        return Center(child: CircularProgressIndicator());
+      },
     );
   }
 }

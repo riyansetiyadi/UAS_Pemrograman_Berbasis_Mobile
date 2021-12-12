@@ -1,26 +1,33 @@
 class WisataModel{
-  int? _id;
+  String _id = "";
   String _foto = "";
   String _nama = "";
-  String _kota = "";
-  String _negara = "";
+  String _desa = "";
+  String _kecamatan = "";
+  String _jamOperasional = "";
+  String _hargaTiket = "";
   String _deskripsi = "";
+  
 
-  WisataModel(this._id, this._foto, this._nama, this._kota, this._negara, this._deskripsi);
+  WisataModel(this._id, this._foto, this._nama, this._desa, this._kecamatan, this._jamOperasional, this._hargaTiket, this._deskripsi);
 
   WisataModel.fromMap(Map<String, dynamic> map){
     this._id=map['id'];
-    this._foto=map['foto'];
+    this._foto=map['foto'] ?? "";
     this._nama=map['nama'] ?? "";
-    this._kota=map['kota'] ?? "";
-    this._negara=map['negara'] ?? "";
+    this._desa=map['desa'] ?? "";
+    this._kecamatan=map['kecamatan'] ?? "";
+    this._jamOperasional=map['jamOperasional'] ?? "";
+    this._hargaTiket=map['hargaTiket'] ?? "";
     this._deskripsi=map['deskripsi'] ?? "";
   }
-  int? get id => _id;
+  String get id => _id;
   String get foto => _foto;
   String get nama => _nama;
-  String get kota => _kota;
-  String get negara => _negara;
+  String get desa => _desa;
+  String get kecamatan => _kecamatan;
+  String get jamOperasional => _jamOperasional;
+  String get hargaTiket => _hargaTiket;
   String get deskripsi => _deskripsi;
 
   set foto(String value){
@@ -29,11 +36,17 @@ class WisataModel{
   set nama(String value){
     _nama=value;
   }
-  set kota(String value) {
-    _kota = value;
+  set desa(String value) {
+    _desa = value;
   }
-  set negara(String value) {
-    _negara = value;
+  set kecamatan(String value) {
+    _kecamatan = value;
+  }
+  set jamOperasional(String value) {
+    _jamOperasional = value;
+  }
+  set hargaTiket(String value) {
+    _hargaTiket = value;
   }
   set deskripsi(String value) {
     _deskripsi = value;
@@ -44,8 +57,10 @@ class WisataModel{
     map['id'] = this._id;
     map['foto'] = foto;
     map['nama'] = nama;
-    map['kota'] = kota;
-    map['negara'] = negara;
+    map['desa'] = desa;
+    map['kecamatan'] = kecamatan;
+    map['jamOperasional'] = jamOperasional;
+    map['hargaTiket'] = _hargaTiket;
     map['deskripsi'] = deskripsi;
     return map;
   } 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuansa/models/user_model.dart';
 import 'package:nuansa/profil.dart';
 import 'favorit.dart';
 import 'home.dart';
@@ -6,16 +7,15 @@ import 'db/database.dart';
 import 'models/wisata_model.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
+  final UserModel userData;
+  const Navigation({Key? key, required this.userData}) : super(key: key);
 
   @override
   State<Navigation> createState() => _NavigationState();
 }
 
 class _NavigationState extends State<Navigation> {
-  DbHelper dbHelper = DbHelper();
-  int count = 0;
-  List<WisataModel> listWisata = []; 
+  DatabaseManager database = DatabaseManager();
   
   int _selectedIndex = 0;
 
@@ -27,13 +27,6 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    Future<List<WisataModel>> listWisataFuture = dbHelper.getWisataList();
-    listWisataFuture.then((listWisata) {
-      this.count = listWisata.length;
-      if (this.count != 0) {
-        this.listWisata = listWisata;
-      }
-    });
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +39,7 @@ class _NavigationState extends State<Navigation> {
           )
         ],
       ),
-      body: <Widget>[HomeScreen(), FavoritScreen(listWisata: listWisata,), ProfilScreen(),].elementAt(_selectedIndex),
+      body: <Widget>[HomeScreen(listWisata: database.getWisataList(), userData: widget.userData,), FavoritScreen(listWisata: database.getUserFavorite(widget.userData.wisataFavorite), userData: widget.userData,), ProfilScreen(),].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

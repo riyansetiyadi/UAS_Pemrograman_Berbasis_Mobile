@@ -3,6 +3,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'models/user_model.dart';
 import 'navigation.dart';
 import 'db/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,43 +13,89 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  DbHelper dbHelper = DbHelper();
+  DatabaseManager database = DatabaseManager();
   int count = 0;
-  UserModel? userData;
-  List<UserModel>? userList;
+  UserModel userData = UserModel("", "error.png", "error", "error", "error", []);
 
   Duration get loginTime => Duration(milliseconds: 2250);
 
   Future<String?>? _onUserLogin(LoginData data) {
-    Future<List<UserModel>> userDataListFuture = dbHelper.getUserByEmail(data.name);
-    userDataListFuture.then((userDataList) {
-      userList = userDataList;
-      count = userDataList.length;
-    });
-    return Future.delayed(loginTime).then((_) {
-      if (count != 0) {
-        if (userList![0].email != data.name) {
-          return 'User not exists';
-        }
-        print(userList!);
-        if (userList![0].kataSandi != data.password) {
-          return 'Password does not match';
-        }
-      } else {
-        return 'Email tidak terdaftar';
+    // Future<List<UserModel>> userDataListFuture = dbHelper.getUserByEmail(data.name);
+    // userDataListFuture.then((userDataList) {
+    //   userList = userDataList;
+    //   count = userDataList.length;
+    // });
+    String? auth;
+    return Future.delayed(loginTime).then((_) async {
+      try {
+        await database.getUserList().then((value) {
+          if (value.isEmpty) {
+            auth = 'Email belum terdaftar';
+          } else {
+            for (var element in value) {
+              if (element.email == data.name) {
+                if (element.kataSandi == data.password) {
+                  auth = null;
+                  userData = element;
+                  break;
+                } else {
+                  auth = 'Password salah';
+                  break;
+                }
+              } else {
+                auth = 'Email belum terdaftar';
+                break;
+              }
+            }
+          }
+        });
+        return auth;
+      } catch (e) {
+        print(e);
+        return "Aplikasi sedang perbaikan";
       }
-      return null;
+      // if (count != 0) {
+      //   if (userList![0].email != data.name) {
+      //     return 'User not exists';
+      //   }
+      //   print(userList!);
+      //   if (userList![0].kataSandi != data.password) {
+      //     return 'Password does not match';
+      //   }
+      // } else {
+      //   return 'Email tidak terdaftar';
+      // }
+      // return null;
     });
   }
 
   Future<String?>? _onUserSignUp(LoginData data) {
-    userData = UserModel(null, data.name, data.name, data.password);
+    String? auth;
     return Future.delayed(loginTime).then((_) async {
-      int result = await dbHelper.insertUser(userData!);
-      if (result > 0) {
-        return null;
-      }
-      return 'Email sudah terdaftar';
+      try {
+        await database.getUserList().then((value) {
+          if (value.isEmpty) {
+            database.signUp(data.name, data.password);
+            auth = null;
+          } else {
+            for (var element in value) {
+              if (element.email == data.name) {
+                auth = "Email anda sudah terdaftar";
+
+                break;
+              } else {
+                database.signUp(data.name, data.password);
+                auth = null;
+              }
+            }
+          }
+        });
+        return auth;
+        } catch (e) {
+          print(e);
+          return "Aplikasi sedang perbaikan";
+        }
+        
     });
   }
 
@@ -70,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onSignup: _onUserSignUp,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Navigation(),
+          builder: (context) => Navigation(userData: userData,),
         ));
       },
       onRecoverPassword: _recoverPassword,
