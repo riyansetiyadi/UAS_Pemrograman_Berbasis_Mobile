@@ -27,7 +27,6 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Nuansa.co"),
@@ -39,7 +38,7 @@ class _NavigationState extends State<Navigation> {
           )
         ],
       ),
-      body: <Widget>[HomeScreen(listWisata: database.getWisataList(), userData: widget.userData,), FavoritScreen(listWisata: database.getUserFavorite(widget.userData.wisataFavorite), userData: widget.userData,), ProfilScreen(),].elementAt(_selectedIndex),
+      body: <Widget>[HomeScreen(userData: widget.userData,), FavoritScreen(userData: widget.userData,), ProfilScreen(),].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
