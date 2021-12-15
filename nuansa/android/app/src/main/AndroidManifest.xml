@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nuansa">
+    package="com.app.nuansa">
    <application
         android:label="nuansa"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.here.sdk.access_key_id" android:value="_xTUDP6p4XR27v4ipSMBhg"/>
+        <meta-data android:name="com.here.sdk.access_key_secret" android:value="wAaedOeme4ub7Azt_LmsurmP9GWLczFuvjIx2aXJa4kTLFoaKrV-OMgPtpF0N4HN-iNXb8nDcAmPaU9cJDD-oA"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
