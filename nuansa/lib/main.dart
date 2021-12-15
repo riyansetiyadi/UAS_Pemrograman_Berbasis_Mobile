@@ -3,10 +3,11 @@ import 'login.dart';
 import 'home.dart';
 import 'detail_wisata.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:here_sdk/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  SdkContext.init(IsolateOrigin.main);
   await Firebase.initializeApp();
   
   runApp(MyApp());
