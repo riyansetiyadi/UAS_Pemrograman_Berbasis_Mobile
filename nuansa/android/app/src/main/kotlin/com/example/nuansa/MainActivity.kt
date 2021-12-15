@@ -1,4 +1,4 @@
-package com.example.nuansa
+package com.app.nuansa
 
 import io.flutter.embedding.android.FlutterActivity
 
