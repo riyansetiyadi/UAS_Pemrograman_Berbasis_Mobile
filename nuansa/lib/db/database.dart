@@ -21,7 +21,7 @@ class DatabaseManager {
     try {
       var coll = await FirebaseFirestore.instance.collection('list_wisata').orderBy(sortKolom, descending: descending).get();
       coll.docs.forEach((item) {
-        wisataList.add(WisataModel(item.id, item.data()['foto'], item.data()['nama'], item.data()['desa'], item.data()['kecamatan'], item.data()['jamOperasional'], item.data()['hargaTiket'], item.data()['jumlahFavorite'], item.data()['deskripsi']));
+        wisataList.add(WisataModel(item.id, item.data()['foto'], item.data()['nama'], item.data()['desa'], item.data()['kecamatan'], item.data()['jamOperasional'], item.data()['hargaTiket'], item.data()['jumlahFavorite'], item.data()['deskripsi'], item.data()['latitude'], item.data()['longitude']));
       });
       return wisataList;
     } catch (e) {

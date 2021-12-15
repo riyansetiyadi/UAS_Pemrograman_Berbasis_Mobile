@@ -8,9 +8,11 @@ class WisataModel{
   String _hargaTiket = "";
   int _jumlahFavorite = 0;
   String _deskripsi = "";
+  double _latitude = 0;
+  double _longitude = 0;
   
 
-  WisataModel(this._id, this._foto, this._nama, this._desa, this._kecamatan, this._jamOperasional, this._hargaTiket, this._jumlahFavorite, this._deskripsi);
+  WisataModel(this._id, this._foto, this._nama, this._desa, this._kecamatan, this._jamOperasional, this._hargaTiket, this._jumlahFavorite, this._deskripsi, this._latitude, this._longitude);
 
   WisataModel.fromMap(Map<String, dynamic> map){
     this._id=map['id'];
@@ -22,6 +24,8 @@ class WisataModel{
     this._hargaTiket=map['hargaTiket'] ?? "";
     this._jumlahFavorite=map['jumlahFavorite'] ?? 0;
     this._deskripsi=map['deskripsi'] ?? "";
+    this._latitude=map['latitude'] ?? 0;
+    this._longitude=map['longitude'] ?? 0;
   }
   String get id => _id;
   String get foto => _foto;
@@ -32,6 +36,8 @@ class WisataModel{
   String get hargaTiket => _hargaTiket;
   int get jumlahFavorite => _jumlahFavorite;
   String get deskripsi => _deskripsi;
+  double get latitude => _latitude;
+  double get longitude => _longitude;
 
   set foto(String value){
     _foto=value;
@@ -57,6 +63,12 @@ class WisataModel{
   set deskripsi(String value) {
     _deskripsi = value;
   }
+  set latitude(double value) {
+    _latitude = value;
+  }
+  set longitude(double value) {
+    _longitude = value;
+  }
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = Map<String, dynamic>();
@@ -69,6 +81,8 @@ class WisataModel{
     map['hargaTiket'] = hargaTiket;
     map['jumlahFavorite'] = jumlahFavorite;
     map['deskripsi'] = deskripsi;
+    map['latitude'] = latitude;
+    map['longitude'] = longitude;
     return map;
   } 
 }

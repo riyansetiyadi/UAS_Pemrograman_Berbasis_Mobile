@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:nuansa/db/database.dart';
+import 'package:nuansa/map_wisata.dart';
 import 'package:nuansa/models/user_model.dart';
 import 'models/wisata_model.dart';
 
@@ -12,7 +12,7 @@ class DetailWisata extends StatefulWidget {
 }
 
 class _DetailWisataState extends State<DetailWisata> {
-  WisataModel _wisata = WisataModel("", "error.png", "error", "error", "error", "error", "error", 0, "error");
+  WisataModel _wisata = WisataModel("", "error.png", "error", "error", "error", "error", "error", 0, "error", 0, 0);
   UserModel _userData = UserModel("", "error.png", "error", "error", "error", []);
   DatabaseManager database = DatabaseManager();
 
@@ -49,6 +49,41 @@ class _DetailWisataState extends State<DetailWisata> {
         //   backgroundColor: Colors.transparent,
         //   foregroundColor: Colors.transparent,
         // ),
+        bottomNavigationBar: Container(
+          height: 60,
+          color: Colors.green,
+          child: InkWell(
+            onTap: () async {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MapWisata(),
+                  settings: RouteSettings(
+                    arguments: {
+                      'wisata': _wisata,
+                    },
+                  ),
+                ),
+              );
+            },
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.map,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    ' Kunjungi',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25
+                    ),
+                  ),
+                ],
+              ),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             
