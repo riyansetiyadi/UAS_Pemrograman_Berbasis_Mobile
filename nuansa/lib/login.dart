@@ -44,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 }
               } else {
                 auth = 'Email belum terdaftar';
-                break;
               }
             }
           }
@@ -127,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
           messages: LoginMessages(
             passwordHint: "Kata Sandi",
             confirmPasswordHint: "Konfirmasi Kata Sandi",
-            forgotPasswordButton: "Lupa Password?",
+            forgotPasswordButton: "",
             goBackButton: "Kembali",
             loginButton: "Masuk",
             signupButton: "Daftar",
