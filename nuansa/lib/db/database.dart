@@ -1,9 +1,7 @@
-import 'package:sqflite/sqflite.dart';
+
 import 'dart:async';
 //mendukug pemrograman asinkron
 import 'dart:io';
-//bekerja pada file dan directory
-import 'package:path_provider/path_provider.dart';
 import 'package:nuansa/models/user_model.dart';
 import 'package:nuansa/models/wisata_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

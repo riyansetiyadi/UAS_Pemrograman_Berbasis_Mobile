@@ -30,8 +30,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_login: ^2.2.1
-  sqflite: any
-  path_provider: any
   here_sdk:
     path: plugins/here_sdk
 
