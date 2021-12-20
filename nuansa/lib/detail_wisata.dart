@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nuansa/controller/weather_service.dart';
 import 'package:nuansa/db/database.dart';
 import 'package:nuansa/map_wisata.dart';
 import 'package:nuansa/models/user_model.dart';
@@ -15,7 +16,7 @@ class _DetailWisataState extends State<DetailWisata> {
   WisataModel _wisata = WisataModel("", "error.png", "error", "error", "error", "error", "error", 0, "error", 0, 0);
   UserModel _userData = UserModel("", "error.png", "error", "error", "error", []);
   DatabaseManager database = DatabaseManager();
-
+  
   bool favorite = false;
 
   @override
@@ -31,7 +32,7 @@ class _DetailWisataState extends State<DetailWisata> {
       favorite = true;
     }
     
-    
+
     // final listDesc = <Widget>[];
     // String textDesc = "";
     // for (var i in _wisata['deskripsi'].toString().split(" ")) {
@@ -42,7 +43,6 @@ class _DetailWisataState extends State<DetailWisata> {
     //   }
     // }
     return (
-      
       Scaffold(
         // appBar: AppBar(
         //   toolbarHeight: kToolbarHeight,
@@ -176,16 +176,16 @@ class _DetailWisataState extends State<DetailWisata> {
                             ),
                           ),
                         ),
-                        Flexible(
-                          child: Text(
-                            " (100 Km)",
-                            style: TextStyle(
-                              fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white54
-                            ),
-                          ),
-                        ),
+                        // Flexible(
+                        //   child: Text(
+                        //     " (100 Km)",
+                        //     style: TextStyle(
+                        //       fontSize: 16,
+                        //           fontWeight: FontWeight.normal,
+                        //           color: Colors.white54
+                        //     ),
+                        //   ),
+                        // ),
                         Row(
                           children: [
                             Icon(
@@ -232,132 +232,10 @@ class _DetailWisataState extends State<DetailWisata> {
                         fontSize: 16
                       ),
                     ),
-                    // for (var i = 0; i < listDesc.length; i++) listDesc[i],
-                    // Flexible(
-                    //   child: Text(
-                    //     "${_wisata?['deskripsi']}"
-                    //   ),
-                    // )
                     SizedBox(
                       height: 50,
                     ),
-                    Text(
-                      "Cuaca ${_wisata.nama}",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                    Text(
-                      "Hari ini, 19 Des 2021",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                    Center(
-                      child: Image.asset(
-                        "assets/images/sunny.png",
-                        width: MediaQuery.of(context).size.width * 0.8,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Text(
-                                "Angin",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "245 km/j",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 21,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Text(
-                          "|",
-                          style: TextStyle(
-                            fontSize: 75,
-                            color: Colors.white30
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Text(
-                                "Suhu",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "27\u2103",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 21,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Text(
-                          "|",
-                          style: TextStyle(
-                            fontSize: 75,
-                            color: Colors.white30
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Text(
-                                "Kelembapan",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "35%",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 21,
-                                  fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 260,
-                    )
+                    cuacaWisata(context),
                   ],
                 ),
               ),
@@ -366,6 +244,147 @@ class _DetailWisataState extends State<DetailWisata> {
           ),
         )
       )
+    );
+  }
+
+  FutureBuilder cuacaWisata(BuildContext context) {
+    DateTime now = new DateTime.now();
+    return FutureBuilder(
+      future: getCuacaWisata(_wisata.latitude, _wisata.longitude),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+                    children: [
+                      Text(
+                        "Cuaca ${_wisata.nama}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      Text(
+                        "Hari ini, ${now.day} ${now.month} ${now.year}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      Center(
+                        child: Image.network(
+                          "http://openweathermap.org/img/wn/${snapshot.data.icon}@4x.png",
+                          width: MediaQuery.of(context).size.width * 0.8,
+                        ),
+                      ),
+                      Text(
+                        snapshot.data.description.toString().toUpperCase(),
+                        style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Angin",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "${(snapshot.data.windSpeed * 3.6).toStringAsFixed(1)} km/j",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Text(
+                            "|",
+                            style: TextStyle(
+                              fontSize: 75,
+                              color: Colors.white30
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Suhu",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "${(snapshot.data.temp - 273.15).toStringAsFixed(0)}\u2103",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Text(
+                            "|",
+                            style: TextStyle(
+                              fontSize: 75,
+                              color: Colors.white30
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Kelembapan",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "${snapshot.data.humidity}%",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 260,
+                      ),
+                    ],
+                  );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      }
     );
   }
 }

@@ -66,11 +66,14 @@ class _MapWisataState extends State<MapWisata> {
             if (snapshot.data?.latitude != 0.0 && snapshot.data?.longitude != 0) {
               userLatitude = snapshot.data!.latitude;
               userLongitude = snapshot.data!.longitude;
+              print(userLatitude);
               return HereMap(onMapCreated: _onMapCreated);
             } else {
+              print(userLongitude);
               return Center(child: CircularProgressIndicator());
             }
           } else {
+            print(userLatitude);
             return Center(child: CircularProgressIndicator());
           }
         }

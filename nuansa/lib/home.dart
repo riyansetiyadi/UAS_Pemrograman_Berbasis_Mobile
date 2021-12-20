@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     elevation: 10.0,
                     shadowColor: Colors.blue,
                     child: TextField(
+                      readOnly: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
@@ -155,8 +156,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           );
+        } else {
+          return Center(child: CircularProgressIndicator());
         }
-        return Center(child: CircularProgressIndicator());
       },
     );
   }

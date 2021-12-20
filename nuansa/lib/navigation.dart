@@ -31,12 +31,12 @@ class _NavigationState extends State<Navigation> {
       appBar: AppBar(
         title: Text("Nuansa.co"),
         toolbarHeight: kToolbarHeight,
-        actions: [
-          IconButton(
-            onPressed: () {}, 
-            icon: Icon(Icons.notifications_none)
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {}, 
+        //     icon: Icon(Icons.notifications_none)
+        //   )
+        // ],
       ),
       body: <Widget>[HomeScreen(userData: widget.userData,), FavoritScreen(userData: widget.userData,), ProfilScreen(userData: widget.userData,),].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
