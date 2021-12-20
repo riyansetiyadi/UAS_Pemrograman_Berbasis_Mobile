@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:nuansa/login.dart';
+import 'package:nuansa/models/user_model.dart';
 import 'models/wisata_model.dart';
 
-class ProfilScreen extends StatelessWidget {
-  const ProfilScreen({Key? key}) : super(key: key);
+
+class ProfilScreen extends StatefulWidget {
+  final UserModel userData;
+  const ProfilScreen({Key? key,  required this.userData}) : super(key: key);
+
+  @override
+  _ProfilScreenState createState() => _ProfilScreenState();
+}
+
+class _ProfilScreenState extends State<ProfilScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,7 @@ class ProfilScreen extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/home_bg.jpg"),
+                    backgroundImage: AssetImage("assets/images/${widget.userData.foto}"),
                   ),
                 ],
               ),
@@ -79,18 +89,9 @@ class ProfilScreen extends StatelessWidget {
                           Icon(Icons.account_circle_outlined),
                           SizedBox(height: 10,width: 15,),
                           Text(
-                            "Naufal Zakly S."),
+                            widget.userData.nama
+                          ),
                           
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 10,),
-                    Container(
-                      child: Row(
-                        children: [
-                          Icon(Icons.add_location_outlined),
-                          SizedBox(height: 10,width: 15,),
-                          Text("Jl. Kalimantan, Jember"),
                         ],
                       ),
                     ),
@@ -100,7 +101,9 @@ class ProfilScreen extends StatelessWidget {
                         children: [
                           Icon(Icons.alternate_email_outlined),
                           SizedBox(height: 10,width: 15,),
-                          Text("dribbble@gmail.com")
+                          Text(
+                            widget.userData.email
+                          )
                         ],),
                     )
                   ],
@@ -161,12 +164,22 @@ class ProfilScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 10,),
                   Container(
-                    child: Row(
-                      children: [
-                        Icon(Icons.logout_outlined),
-                        SizedBox(height: 10,width: 15,),
-                        Text("Logout")
-                      ],
+                    child: InkWell(
+                      onTap: () async {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
+                          },
+                      child: Row(
+                        children: [
+                          Icon(Icons.logout_outlined),
+                          SizedBox(height: 10,width: 15,),
+                          Text("Logout")
+                        ],
+                      ),
                     ),
                   ),
                 ],

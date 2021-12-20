@@ -38,7 +38,7 @@ class _NavigationState extends State<Navigation> {
           )
         ],
       ),
-      body: <Widget>[HomeScreen(userData: widget.userData,), FavoritScreen(userData: widget.userData,), ProfilScreen(),].elementAt(_selectedIndex),
+      body: <Widget>[HomeScreen(userData: widget.userData,), FavoritScreen(userData: widget.userData,), ProfilScreen(userData: widget.userData,),].elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

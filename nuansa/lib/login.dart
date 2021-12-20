@@ -111,30 +111,35 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     
-    return FlutterLogin(
-      title: "Nuansa.co",
-      onLogin: _onUserLogin,
-      onSignup: _onUserSignUp,
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Navigation(userData: userData,),
-        ));
-      },
-      onRecoverPassword: _recoverPassword,
-      messages: LoginMessages(
-        passwordHint: "Kata Sandi",
-        confirmPasswordHint: "Konfirmasi Kata Sandi",
-        forgotPasswordButton: "Lupa Password?",
-        goBackButton: "Kembali",
-        loginButton: "Masuk",
-        signupButton: "Daftar",
-        recoverPasswordButton: "Lanjutkan",
-        recoverPasswordIntro: "Setel ulang kata sandi anda di sini",
-        recoverPasswordDescription: "Kami akan mengirimkan kata sandi anda ke akun email ini",
-        confirmPasswordError: "Kata sandi salah",
-        recoverPasswordSuccess: "Email telah dikirim",
-        flushbarTitleError: "Kesalahan",
-        flushbarTitleSuccess: "Sukses"
+    return Scaffold(
+      body: WillPopScope(
+        onWillPop: () async => false,
+        child: FlutterLogin(
+          title: "Nuansa.co",
+          onLogin: _onUserLogin,
+          onSignup: _onUserSignUp,
+          onSubmitAnimationCompleted: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => Navigation(userData: userData,),
+            ));
+          },
+          onRecoverPassword: _recoverPassword,
+          messages: LoginMessages(
+            passwordHint: "Kata Sandi",
+            confirmPasswordHint: "Konfirmasi Kata Sandi",
+            forgotPasswordButton: "Lupa Password?",
+            goBackButton: "Kembali",
+            loginButton: "Masuk",
+            signupButton: "Daftar",
+            recoverPasswordButton: "Lanjutkan",
+            recoverPasswordIntro: "Setel ulang kata sandi anda di sini",
+            recoverPasswordDescription: "Kami akan mengirimkan kata sandi anda ke akun email ini",
+            confirmPasswordError: "Kata sandi salah",
+            recoverPasswordSuccess: "Email telah dikirim",
+            flushbarTitleError: "Kesalahan",
+            flushbarTitleSuccess: "Sukses"
+          ),
+        ),
       ),
     );
   }
