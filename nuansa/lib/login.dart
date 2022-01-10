@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         await database.getUserList().then((value) {
           if (value.isEmpty) {
-            database.signUp(data.name, data.password);
+            userData = database.signUp(data.name, data.password);
             auth = null;
           } else {
             for (var element in value) {
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 break;
               } else {
-                database.signUp(data.name, data.password);
+                userData = database.signUp(data.name, data.password);
                 auth = null;
               }
             }
